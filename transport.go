@@ -66,7 +66,7 @@ func (m *MockTransport) CancelRequest(req *http.Request) {}
 func (m *MockTransport) responderForKey(key string) Responder {
 	for k, r := range m.responders {
 		re := regexp.MustCompile(k)
-		if re.MatchString(key) {
+		if ! re.MatchString(key) {
 			// if k != key {
 			continue
 		}
