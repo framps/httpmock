@@ -3,6 +3,7 @@ package httpmock
 import (
 	"errors"
 	"net/http"
+	"regexp"
 	"strings"
 )
 
@@ -64,7 +65,9 @@ func (m *MockTransport) CancelRequest(req *http.Request) {}
 // responderForKey returns a responder for a given key
 func (m *MockTransport) responderForKey(key string) Responder {
 	for k, r := range m.responders {
-		if k != key {
+		re := regexp.MustCompile(k)
+		if re.MatchString(key) {
+			// if k != key {
 			continue
 		}
 		return r
